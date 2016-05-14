@@ -20,6 +20,10 @@ class Iplist:
         return html
 
     def get_ip_list(self):
+        """
+        先获得有关于IP以及port一行的内容
+        然后再提取IP和port组合成IP:port形式
+        """
         lines = self.reLine.findall(self.get_page())
         iplist = []
         for ip in lines:
