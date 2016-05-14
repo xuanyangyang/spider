@@ -1,5 +1,6 @@
 抓取妹子图片以及抓取IP代理
 =======
+抓取的网址：http://jandan.net/ooxx <br>
 use python3.x <br>
 使用方法：
 python mmPicture.py
