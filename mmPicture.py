@@ -8,7 +8,7 @@ from iplist import Iplist
 iplist = Iplist('http://www.xicidaili.com/nt/').get_ip_list()
 current_ip = '0'
 
-
+# 更换代理
 def change_proxy():
     global iplist
     if len(iplist) == 0:
@@ -22,8 +22,10 @@ def change_proxy():
     opener = urllib.request.build_opener(proxy_support)
     urllib.request.install_opener(opener)
 
+# 打开一个网站，返回html代码
 def open_url(url):
     req = urllib.request.Request(url)
+    # 添加浏览器头，伪装人
     req.add_header('User-Agent',
                    "Mozilla/5.0 (X11; Linux x86_64; rv:43.0) Gecko/20100101 Firefox/43.0 Iceweasel/43.0.4")
 
@@ -44,7 +46,7 @@ def open_url(url):
         html = response.read()
         return html
 
-
+# 得到页数
 def get_page(url):
     html = open_url(url).decode('utf-8')
 
@@ -53,7 +55,7 @@ def get_page(url):
 
     return page
 
-
+# 寻找图片地址
 def find_img(url):
     html = open_url(url).decode('utf-8')
 
@@ -61,15 +63,16 @@ def find_img(url):
 
     return imgs
 
-
+# 保存图片
 def save_img(imgs):
     for img in imgs:
         print('图片地址：'+img)
+        # 取地址最后一段为名
         imgName = img.split('/')[-1]
         with open(imgName, 'wb') as f:
             f.write(open_url(img))
 
-
+# 下载图片
 def download_mm(folder='MM'):
     if not os.path.exists(folder):
         os.mkdir(folder)
